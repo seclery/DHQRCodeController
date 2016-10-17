@@ -8,6 +8,8 @@
 
 #import "ViewController.h"
 
+#import "DHQRCodeViewController.h"
+
 @interface ViewController ()
 
 @end
@@ -16,7 +18,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    // Do any additional setup after loading the view, typically from a nib.
+    [self.view setBackgroundColor:[UIColor whiteColor]];
+    
+    UIButton *QRCodeButton  = [UIButton buttonWithType:UIButtonTypeSystem];
+    [QRCodeButton setTitle:@"扫 描" forState:UIControlStateNormal];
+    [self.view addSubview:QRCodeButton];
+    
+    [QRCodeButton sizeToFit];
+    QRCodeButton.center     = self.view.center;
+    
+    [QRCodeButton addTarget:self action:@selector(startQRCode:) forControlEvents:UIControlEventTouchUpInside];
 }
 
 
@@ -25,5 +36,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)startQRCode:(id)sender {
+    DHQRCodeViewController *QRCodeView  = [[DHQRCodeViewController alloc] init];
+    QRCodeView.titleString              = @"扫一扫";
+    [self.navigationController pushViewController:QRCodeView animated:YES];
+}
 
 @end
